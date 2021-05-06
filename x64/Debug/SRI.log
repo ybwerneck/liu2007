@@ -1,0 +1,19 @@
+﻿  SRI.cpp
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(28,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(211,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(213,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(213,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 2 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(215,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(215,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 2 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(215,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 3 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(217,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(217,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 2 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(217,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 3 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(219,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(219,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 2 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(219,20): warning C4477: 'sprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 3 has type 'std::string'
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(195,21): warning C4101: 'a': unreferenced local variable
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(195,28): warning C4101: 'b': unreferenced local variable
+C:\Users\yanbw\source\repos\novo\WAN-\SRI.cpp(239,16): warning C4129: ' ': unrecognized character escape sequence
+LINK : warning LNK4044: unrecognized option '/openmp:experimental'; ignored
+  SRI.vcxproj -> C:\Users\yanbw\source\repos\novo\WAN-\x64\Debug\SRI.exe
