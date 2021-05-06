@@ -59,40 +59,18 @@ void initValues() {
    
     S = new Matrix(tam, tam, S0);
     I = new Matrix(tam, tam, I0);
-
-        
+    D11 = new Matrix(tam, tam, 0.02);
+    D22 = new Matrix(tam, tam, 0.005);
+       
         for (int i = 0; i < tam; i++) {
         for (int j = 0; j < tam; j++)
         {
-            long double r1 = random(100, 100) * 0.01;
-            long double r2 = random (40, 100) * 0.01;
+            long double r2 = random(50, 100) * 0.01;
             I ->operator()(i, j, r2 * I0);
 
         }
     }
-
-    double centrox = tam / 2, centroy = tam / 2;
-    double maxdistancia = pow(pow(centrox - 0, 2) + pow(centroy - 0, 2), 0.5);
-
-    D11 = new Matrix(tam, tam, 0.02);
-    D22 = new Matrix(tam, tam, 0.005);
-    for (int i = 0; i < tam; i++) {
-
-        for (int j = 0; j < tam; j++)
-        {
-            double distancia = pow(pow(centrox - i, 2) + pow(centroy - j, 2), 0.5);
-            double frac = (distancia / maxdistancia);
-            //D11 ->operator()(i, j, pow(frac, 0.5) * 0.05);
-            // D22 ->operator()(i, j, 1.0 - pow(frac, 0.5) * 0.9);
-
-        }
     }
-
-
-
-
-
-}
 long double f(long double S, long double I) {
 
 
@@ -104,22 +82,6 @@ long double g(long double S, long double I) {
    return (lambda * S * I) -((d+gamma)*I) - r;  
   }
 
-long double harmonica(double n1, double n2) {
-    return (2.0 * n1 * n2) / (n1 + n2);
-}
-long double difussionHet(Matrix* ua, int x, int y, Matrix* coef) {
-    Matrix* S = ua;
-    long double difx, dify;
-    long double Ye = harmonica(coef->operator()(x - 1, y), coef->operator()(x, y)) / (dx * dx);
-    long double Yd = harmonica(coef->operator()(x + 1, y), coef->operator()(x, y)) / (dx * dx);
-    long double Yc = harmonica(coef->operator()(x, y - 1), coef->operator()(x, y)) / (dx * dx);
-    long double Yb = harmonica(coef->operator()(x, y + 1), coef->operator()(x, y)) / (dx * dx);
-    difx = (-S->operator()(x, y) + S->operator()(x - 1, y)) * Yd + (-S->operator()(x, y) + S->operator()(x + 1, y)) * Ye;
-    dify = (-S->operator()(x, y) + S->operator()(x, y + 1)) * Yc + (-S->operator()(x, y) + S->operator()(x, y - 1)) * Yb;
-
-    return difx + dify;
-
-}
 long double difussion(Matrix* ua, int x, int y, Matrix* coef) {
 
     Matrix* A = ua;
@@ -129,9 +91,7 @@ long double difussion(Matrix* ua, int x, int y, Matrix* coef) {
     long double cima = A->operator()(x, (y == 0) ? tam - 1 : y - 1);
     long double baixo = A->operator()(x,(y == tam-1) ? 0 : y + 1);
     long double ponto = A->operator()(x, y);
-
     long double Y = dt*coef->operator()(x,y) / (dx * dx);
-
     difx = (-2.0 *ponto + esquerda + direita) * Y;
     dify = (-2.0 * ponto + cima + baixo) * Y;
     return difx + dify;
@@ -159,11 +119,6 @@ void printIntegrals(Matrix* S, Matrix* I, FILE* Iarq, double t) {
     fprintf(Iarq, "\n");
 
 };
-void printCoeficients(FILE* Darq, FILE* Rarq, double t) {
-
-
-             
-};
 void printMatrixtoFile(Matrix* S, Matrix* I, FILE* Uarq, FILE* Varq) {
 
     for (int v = 0; v < tam; v++)
@@ -171,31 +126,18 @@ void printMatrixtoFile(Matrix* S, Matrix* I, FILE* Uarq, FILE* Varq) {
         int dx = 1;
         for (int j = 0; j < tam; j++)
         {
-
             fprintf(Uarq, "%f ", S->operator()(v, j)); //att
             fprintf(Varq, "%f ", I->operator()(v, j)); //att
-
-
         }
         fprintf(Uarq, "\n");
         fprintf(Varq, "\n");
-
     };
-
-
-
-
 }
 void makeResultFiles(std::string sub) {
-
     std::time_t t = std::time(nullptr);
     char mbstr[100],a[100],b[100];
-    
     std::strftime(mbstr, sizeof(mbstr), "%H.%M-%d%b%Y", std::localtime(&t));
-
-
     std::string data = mbstr;
-
     subpasta = resupasta + "/" + sub + "/" + data;
     filename0 = subpasta + "/" + filename0;
     filename = subpasta + "/" + filename;
@@ -203,7 +145,6 @@ void makeResultFiles(std::string sub) {
     filename3 = subpasta + "/" + filename3;
     filename4 = subpasta + "/" + filename4;
     filename5 = subpasta + "/" + filename5;
-
     char param[200];
     sprintf(param, "mkdir %s", resupasta);
     system(param);
@@ -215,11 +156,8 @@ void makeResultFiles(std::string sub) {
     system(param);
     sprintf(param, "mkdir %s\\%s\\%s\\result", resupasta, sub, data);
     system(param);
-
-
     D1arq = fopen(filename3.c_str(), "w");
     D2arq = fopen(filename5.c_str(), "w");
-
     Sarq = fopen(filename.c_str(), "w");
     Iarq = fopen(filename2.c_str(), "w");
     Integralsarq = fopen(filename0.c_str(), "w");
@@ -260,19 +198,16 @@ int main()
         //rotinas de impressão no arquivo 
         if (i % 40 == 0)
             printIntegrals(S, I, Integralsarq, i);
-        printCoeficients(D1arq, Rarq, i);
 
         if (parada == -1 && (i % (n / frames) == 0))
         {
-            printMatrixtoFile(D11, D22, D1arq, D2arq);
+         
             printMatrixtoFile(S, I, Sarq, Iarq);
 
             if (i != n - 1)
             {
                 fprintf(Sarq, "\n\n");
                 fprintf(Iarq, "\n\n");
-                fprintf(D1arq, "\n\n");
-                fprintf(D2arq, "\n\n");
             }
         }
         if (parada != -1 && i == parada)
@@ -297,8 +232,6 @@ int main()
     if (parada == -1) {
         saveGif((char*)filename.c_str(), (char*)(subpasta + "/result/S.gif").c_str(), dx, dt, tick);
         saveGif((char*)filename2.c_str(), (char*)(subpasta + "/result/I.gif").c_str(), dx, dt, tick);
-        saveGif((char*)filename3.c_str(), (char*)(subpasta + "/result/D1.gif").c_str(), dx, dt, tick);
-        saveGif((char*)filename5.c_str(), (char*)(subpasta + "/result/D2.gif").c_str(), dx, dt, tick);
 
     }
     else
@@ -307,10 +240,8 @@ int main()
         saveFoto((char*)filename2.c_str(), (char*)(subpasta + "/result/I.png").c_str(), dx, dt, parada);
 
     }
-    // saveDl((char*)filename3.c_str(), (char*)(subpasta + "/result/Dif.png").c_str(), "d1", "d2");
 
     saveDl((char*)filename0.c_str(), (char*)(subpasta + "/result/Int.png").c_str(), "S", "I");
-    saveTl((char*)filename4.c_str(), (char*)(subpasta + "/result/R.png").c_str(), "R0", "Rd", "V");
-
+   
 
 }

@@ -2,3 +2,4 @@ C:\Users\yanbw\source\repos\SRI\x64\Release\SRI.exe
 C:\Users\yanbw\source\repos\presapredador\x64\Release\SRI.exe
 C:\Users\yanbw\source\repos\wan\x64\Release\SRI.exe
 C:\Users\yanbw\source\repos\novo\WAN-\x64\Release\SRI.exe
+C:\Users\yanbw\source\repos\novo\WAN-\liu2007\x64\Release\SRI.exe
